@@ -1,0 +1,111 @@
+<body>
+    <div class="container w-50 border border-3 border-primary-subtle rounded-4">
+        <h1 class="text-center">Product</h1>
+           <form action="/add" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Enter name product</label>
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Enter name product">
+                </div>
+                <div class="mb-3">
+                    <label for="color" class="form-label">Enter color product</label>
+                    <input name="color" type="text" class="form-control" id="color" placeholder="Enter color product">
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Enter price product</label>
+                    <input name="price" type="text" class="form-control" id="price" placeholder="Enter price product">
+                </div>
+                <div class="row justify-content-center">
+                        <button type="submit" class="col-3 m-1 btn btn-primary">add</button>
+                </div>
+           </form>
+    </div>
+    <div class="container-fluid">
+        <div class="row w-75 m-auto">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Price</th>
+                    <th></th>
+                    </tr>
+                </thead>
+                {{#each product}}
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{this._id}}</th>
+                            <td>{{this.name}}</td>
+                            <td>{{this.color}}</td>
+                            <td>{{this.price}}</td>
+                            <td class="row">
+                                <div class="col-3">
+                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#delete{{this._id}}">
+                                        delete
+                                    </button>
+                                    <div class="modal fade" id="delete{{this._id}}" tabindex="-1" aria-labelledby="delete{{this._id}}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="delete{{this._id}}">Delete product?</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you want delete this product?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                    <form action="/delete" method="post">
+                                                        <input type="hidden" value={{this._id}} name="id">
+                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#edit{{this._id}}">
+                                        edit
+                                    </button>
+                                    <div class="modal fade" id="edit{{this._id}}" tabindex="-1" aria-labelledby="edit{{this._id}}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="edit{{this._id}}">Edit product?</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Do you want edit this product?</p>
+                                                     <form action="/edit" method="post">
+                                                        <div class="mb-3">
+                                                            <label for="name" class="form-label">Enter name product</label>
+                                                            <input value={{this.name}} name="name" type="text" class="form-control" id="name" placeholder="Enter name product">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="color" class="form-label">Enter color product</label>
+                                                            <input value={{this.color}} name="color" type="text" class="form-control" id="color" placeholder="Enter color product">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="price" class="form-label">Enter price product</label>
+                                                            <input value={{this.price}} name="price" type="text" class="form-control" id="price" placeholder="Enter price product">
+                                                        </div>
+                                                        <input type="hidden" value={{this._id}} name="id">
+                                                        <button type="submit" class="btn btn-primary">Yes</button>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</body>
